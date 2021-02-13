@@ -1,7 +1,6 @@
 use crate::Terminal;
-use std::io::{self, stdout, Write};
+use std::io::stdout;
 use termion::event::Key;
-use termion::input::TermRead;
 use termion::raw::IntoRawMode;
 
 pub struct Editor {
@@ -34,16 +33,16 @@ impl Editor {
     }
 
     fn refresh_screen(&self) -> Result<(), std::io::Error> {
+        Terminal::cursor_hide();
         Terminal::clear_screen();
         Terminal::cursor_position(0, 0);
-
         if self.should_quit {
             println!("Goodbye.\r");
         } else {
             self.draw_rows();
             Terminal::cursor_position(0, 0);
         }
-
+        Terminal::cursor_show();
         Terminal::flush()
     }
 
