@@ -42,7 +42,7 @@ impl Row {
                 if highlighting_type != current_highlighting {
                     current_highlighting = highlighting_type;
                     let start_highlight =
-                        format!("{}", termion::color::Fg(highligting_type.to_color()));
+                        format!("{}", termion::color::Fg(highlighting_type.to_color()));
                     result.push_str(&start_highlight[..]);
                 }
                 if c == '\t' {
