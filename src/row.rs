@@ -213,6 +213,17 @@ impl Row {
             } else {
                 &highlighting::Type::None
             };
+
+            if opts.comments() && *c == '/' {
+                if let Some(next_char) = chars.get(index.saturating_add(1)) {
+                    if *next_char == '/' {
+                        for _ in index..chars.len() {
+                            highlighting.push(highlighting::Type::Comment);
+                        }
+                        break;
+                    }
+                }
+            }
             if opts.charaters() && !in_string && *c == '\'' {
                 prev_is_separator = true;
                 if let Some(next_char) = chars.get(index.saturating_add(1)) {
