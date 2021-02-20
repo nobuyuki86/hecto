@@ -269,7 +269,7 @@ impl Editor {
             }
             Key::PageUp => {
                 y = if y > terminal_height {
-                    y.saturating_add(terminal_height)
+                    y.saturating_sub(terminal_height)
                 } else {
                     0
                 };
